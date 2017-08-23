@@ -23,9 +23,9 @@ Load your required hero data below using a form that requests the Habitica User 
 #### Required Result: 
 - Masks the API token (password field)
 - Displays for the submitted User ID
-* 1.       Profile name
-* 2.       Avatar PNG
-* 3.       Gold amount
+    1.  Profile name
+    2.  Avatar PNG
+    3.  Gold amount
 
 
 #### Resources
