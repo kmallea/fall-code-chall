@@ -1,14 +1,41 @@
 <!doctype html>
-<html lang="en" ng-app>
-  <head>
-    <meta charset="utf-8">
-    <title>My HTML File</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <script src="bower_components/angular/angular.js"></script>
-  </head>
-  <body>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- AngularJS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <!-- Firebase -->
+      
+    </head> 
+    <body>
+<div ng-app="myApp" ng-controller="myCtrl">
+<form >
+                Habitica User ID:<br>
+                <input type="text" ng-model="user.userid"><br>
+                Api token:<br>
+                <input type="password" ng-model="user.apitoken">
+                <br><br>
+                <button ng-click="reset()">RESET</button>
+                <button type="button" ng-click="getDetails()">Get Details</button>
+     </form>
 
-    <p>Nothing here {{'yet' + '!'}}</p>
+     <div>1.  Profile name:  {{myWelcome}}<br>
+                    2.  Avatar PNG: {{}}<br>
+                    3.  Gold amount: {{}}
+             </div>
 
-  </body>
+<p>{{ count }}</p>
+
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.getDetails = function() {
+        alert("hi");
+    
+    }
+
+});
+</script>
+</body>
 </html>
