@@ -7,35 +7,57 @@
         <!-- Firebase -->
       
     </head> 
-    <body>
-<div ng-app="myApp" ng-controller="myCtrl">
-<form >
-                Habitica User ID:<br>
-                <input type="text" ng-model="user.userid"><br>
-                Api token:<br>
-                <input type="password" ng-model="user.apitoken">
-                <br><br>
-                <button ng-click="reset()">RESET</button>
-                <button type="button" ng-click="getDetails()">Get Details</button>
-     </form>
-
-     <div>1.  Profile name:  {{myWelcome}}<br>
-                    2.  Avatar PNG: {{}}<br>
-                    3.  Gold amount: {{}}
-             </div>
-
-<p>{{ count }}</p>
-
-</div>
-<script>
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope) {
-    $scope.getDetails = function() {
-        alert("hi");
+        <body ng-app="myApp">
+            <div ng-controller="myCtrl">
     
-    }
+                   <form novalidate>
+                    Habitica User ID:<br>
+                    <input type="text" ng-model="userid"><br>
+                    Api token:<br>
+                    <input type="password" ng-model="apitoken">
+                    <br><br>
+                    <button ng-click="reset()">RESET</button>
+                    <button type="button" ng-click="getDetails()">Get Items</button>
+                  </form>
+                
+                    <div>1.  Profile name:  {{name}}<br>
+                        2.  Avatar PNG: <img src="{{avatar}}" alt=""/><br>
+                        3.  Gold amount: {{gp}}
+                    </div>
+            </div>
+<script>
+var config = {
+    apiKey: "AIzaSyAj7IWXqJYrABDDZ4RC4AZT8uYrd76NWvU",
+    authDomain: "angular-6cb30.firebaseapp.com",
+    databaseURL: "https://angular-6cb30.firebaseio.com",
+    projectId: "angular-6cb30",
+    storageBucket: "angular-6cb30.appspot.com",
+    messagingSenderId: "135337631576"
+  };
+  
+  var app = angular.module('myApp', []);
+  app.controller('myCtrl', function($scope, $http) {
+      $scope.getDetails = function() {
+          var userid = $scope.userid;
+          var api = $scope.apitoken;
+          var profURL = "https://habitica-assets.s3.amazonaws.com/avatars/"+userid+".png"
+          var apiURL = "https://habitica.com/api/v3/members/"+userid;
+          console.log(userid);
+          $http({
+              method : "GET",
+              url : apiURL
+          }).then(function mySuccess(response) {
+              var Data = response.data;
+              $scope.name = Data.data.profile.name;
+              $scope.gp = Data.data.stats.gp;
+              $scope.avatar = profURL;
+              console.log(Data.data);
 
-});
+          }, function myError(response) {
+              $scope.myWelcome = response.statusText;
+          });
+      }
+  });
 </script>
 </body>
 </html>
